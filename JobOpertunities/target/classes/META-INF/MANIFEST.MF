@@ -1,0 +1,10 @@
+Manifest-Version: 1.0
+Implementation-Title: JobOpertunities
+Implementation-Version: 0.0.1-SNAPSHOT
+Built-By: SUNIL
+Implementation-Vendor-Id: com.Employement
+Build-Jdk: 1.8.0_181
+Implementation-URL: https://spring.io/projects/spring-boot/JobOpertuni
+ ties
+Created-By: Maven Integration for Eclipse
+
