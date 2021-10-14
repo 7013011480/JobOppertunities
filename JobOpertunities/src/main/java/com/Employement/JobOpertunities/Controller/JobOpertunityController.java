@@ -6,9 +6,12 @@ import java.util.List;
 import java.util.Random;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.Employement.JobOpertunities.Model.ApplicantDetails;
@@ -18,7 +21,7 @@ import com.Employement.JobOpertunities.Repository.ApplicantRepository;
 import com.Employement.JobOpertunities.Repository.JobRepository;
 import com.Employement.JobOpertunities.Repository.JobApplicantRepository;
 
-@RestController
+@Controller
 public class JobOpertunityController {
 
 	@Autowired 
@@ -30,7 +33,33 @@ public class JobOpertunityController {
 	@Autowired
 	JobApplicantRepository job_applicant_repository;
 	
+	
+	@RequestMapping("/home")
+	public  String Home()
+	{
+		return "Home";
+	}
+	
+	@RequestMapping("/Register")
+	public  String Register()
+	{
+		return "Register";
+	}
+	
+	@RequestMapping("/AddJob")
+	public  String AddJob()
+	{
+		return "AddJob";
+	}
+	
+	@RequestMapping("/Candidates_Jobs")
+	public  String Candidates_Jobs()
+	{
+		return "Candidates_Jobs";
+	}
+	
 	@PostMapping("/ApplicantData")
+    @ResponseBody
 	public String ApplicantData( @RequestParam("applicantName") String applicantName,
 								 @RequestParam("qualification") String qualification,
 								 @RequestParam("email") String email,
@@ -43,6 +72,7 @@ public class JobOpertunityController {
 	}
 	
 	@PostMapping("/JobData")
+	@ResponseBody
 	public String JobData( @RequestParam("JobDescription") String jobDescription,
 							 @RequestParam("MinQualification") String qualification,
 							 @RequestParam("Email") String email,
@@ -54,6 +84,7 @@ public class JobOpertunityController {
 	}
 	
 	@GetMapping("/getAllJobs")
+	@ResponseBody
 	public List<JobDetails> getAllJobDetails()
 	{
 		List<JobDetails> list= job_repository.findAll();
@@ -62,6 +93,7 @@ public class JobOpertunityController {
 	
 	
 	@GetMapping("/getApplicants")
+	@ResponseBody
 	public List<ApplicantDetails> getApplicants(@RequestParam("JobId") Long jobId)
 	{
 		List<JobApplicant> jobs = job_applicant_repository.findByJobId(jobId);
@@ -79,6 +111,7 @@ public class JobOpertunityController {
 	}
 	
 	@PostMapping("/saveApplicants")
+	@ResponseBody
 	public String saveAppicants(@RequestParam("JobId") Long jobId,
 								@RequestParam("ApplicantId") Long applicantId)
 	{
